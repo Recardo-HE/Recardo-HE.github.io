@@ -1,0 +1,55 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.ant-card-body {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row
+}
+
+.container {
+    width: 300px;
+    height: 300px;
+    outline: 1px solid #000;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    animation: rotate linear infinite 20s;
+}
+
+.container .item {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+}
+
+.container img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    animation: rotate linear infinite 20s reverse;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.box_content {
+    margin: 5% auto;
+    width: 80%;
+    height: 90%;
+    border: 1px solid #000;
+}
+
+.box_title {
+    
+}
