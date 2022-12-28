@@ -1,55 +1,69 @@
 import React, { useState } from 'react'
-import { Button, Layout, Tabs } from 'antd'
-import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
+import { Button, Layout, Tabs, Select } from 'antd'
+import { FullscreenOutlined, FullscreenExitOutlined, BellOutlined } from '@ant-design/icons';
 import { Outlet, useNavigate } from 'react-router-dom';
 import * as screen from '../static/js/fullScrien.js'
-const { Header, } = Layout;
+
 function Home() {
-    const [activeKey, setActiveKey] = useState('1');
-    const [items, setItems] = useState([
-        {
-            key: '/home/chain',
-            label: '指标全链路',
-        },
-        {
-            key: '/home/manage',
-            label: '指标管理',
-        }
-    ]);
-    const navigate = useNavigate()
-    const [check, setCheck] = useState(false)
-    const onChange = (key) => {
-        setActiveKey(key);
-        navigate(key)
-    };
-    function getScreen() {
-        if (check) {
-            screen.exitFullScreen()
-            setCheck(false)
-        } else {
-            screen.enterFullScreen()
-            setCheck(true)
-        }
+    const navgiate = useNavigate()
+
+    const onclick = (e) => {
+        navgiate(e.target.className)
     }
+
+ 
+
+
     return (
         <>
-            <Layout>
-                <Header className='header' style={{ backgroundColor: 'white' }}>
-                    <Button type="dashed" >
-                        首页
-                    </Button>
-                    <Button type="dashed" >
-                        指标管理
-                    </Button>
-                    <Button
-                        type="dashed"
-                        icon={check ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
-                        onClick={getScreen}>
-                    </Button>
-                    {/* <Tabs items={items}/> */}
-                </Header>
-                <Outlet />
-            </Layout>
+            <div className='box'>
+                <div className='header'>
+                    <div className='box_head'>
+                        <div className='head_left'>
+                            <div className='head_logo' >
+                                <img src={require('../static/images/logo512.png')} alt="" />
+                            </div>
+                            <div className='head_content'>
+                                <div className='head_content_top'>
+                                    融合服务运营平台
+                                </div>
+                                <div className='head_content_bottom'>
+                                    运营门户
+                                </div>
+                            </div>
+                        </div>
+                        <div className='head_right'>
+                            <div className='head_right_icon'>
+                                <i><BellOutlined /></i>
+                            </div>
+                            <div className='head_right_srceen' onClick={() => { screen.enterFullScreen() }}>
+                               <div>全屏模式</div> 
+                            </div>
+                            <div className='head_right_company'>
+                                <select name='firm'>
+                                    <option value="内蒙古">内蒙古分公司</option>
+                                    <option value="青海">青海分公司</option>
+                                </select>
+                            </div>
+                            <div className='head_right_theme'>
+                                <select name='theme'>
+                                    <option value="dark">深度模式</option>
+                                    <option value="light">护眼模式</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='box_tabs'>
+                        <div onClick={onclick} className='/home/chain'>
+                            首页
+                        </div>
+                        <div onClick={onclick} className='/home/cate'>
+                            指标管理
+                        </div>
+                    </div>
+                </div>
+                <Outlet></Outlet>
+            </div>
         </>
     )
 }
